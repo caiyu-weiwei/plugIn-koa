@@ -4,9 +4,19 @@ const app = new Koa()
 
 const userAgent = require('koa-useragent')
 
+const log = require('./log')
+
+const config = {
+  formate: text => `------${text}-----`
+}
+
 app.use(userAgent)
 
+app.use(log(config))
+
 app.use(async (ctx, next) => {
+  console.log('ctx', ctx)
+  console.log('next', next)
   console.log(require('util').inspect(ctx.userAgent))
 })
-app.listen(3000)
+app.listen(3088)
